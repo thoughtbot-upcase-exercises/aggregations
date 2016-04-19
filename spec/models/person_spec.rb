@@ -3,8 +3,6 @@ require "spec_helper"
 describe Person do
   describe ".maximum_salary_by_location" do
     it "finds the highest salary at each location" do
-      pending "Implement maximum_salary_by_location to make this spec pass"
-
       [50_000, 60_000].each do |highest_salary|
         location = create(:location, name: "highest-#{highest_salary}")
         create(:person, location: location, salary: highest_salary - 1)
@@ -29,8 +27,6 @@ describe Person do
 
   describe ".managers_by_average_salary_difference" do
     it "orders managers by the difference between their salary and the average salary of their employees" do
-      pending "Implement managers_by_average_salary_difference to make this spec pass"
-
       highest_difference = [45_000, 20_000]
       medium_difference = [50_000, 10_000]
       lowest_difference = [50_000, -5_000]
