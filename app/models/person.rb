@@ -8,7 +8,7 @@ class Person < ActiveRecord::Base
     {}
   end
 
-  def self.managers_by_salary_difference
+  def self.managers_by_average_salary_difference
     all
   end
 end

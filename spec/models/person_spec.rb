@@ -27,26 +27,29 @@ describe Person do
     end
   end
 
-  describe ".managers_by_salary_difference" do
-    it "orders managers by salary difference over their employees" do
-      pending "Implement managers_by_salary_difference to make this spec pass"
+  describe ".managers_by_average_salary_difference" do
+    it "orders managers by the difference between their salary and the average salary of their employees" do
+      pending "Implement managers_by_average_salary_difference to make this spec pass"
 
-      [
-        [50_000, 10_000],
-        [50_000, -5_000],
-        [45_000, 20_000]
-      ].each do |(salary, spread)|
-        manager = create(:person, salary: salary, name: "spread-#{spread}")
-        create(:person, manager: manager, salary: salary - spread * 1)
-        create(:person, manager: manager, salary: salary - spread * 2)
-        create(:person, manager: manager, salary: salary - spread * 3)
+      highest_difference = [45_000, 20_000]
+      medium_difference = [50_000, 10_000]
+      lowest_difference = [50_000, -5_000]
+      ordered_differences = [highest_difference, medium_difference, lowest_difference]
+
+      ordered_differences.each do |(salary, difference)|
+        manager = create(:person, salary: salary, name: "difference-#{difference}")
+        create(:person, manager: manager, salary: salary - difference * 1)
+        create(:person, manager: manager, salary: salary - difference * 2)
+        create(:person, manager: manager, salary: salary - difference * 3)
       end
 
-      result = Person.managers_by_salary_difference
-      puts result.to_sql
+      result = Person.managers_by_average_salary_difference
 
-      expect(result.map(&:name)).
-        to eq(%w(spread-20000 spread-10000 spread--5000))
+      expect(result.map(&:name)).to eq(%w(
+        difference-20000
+        difference-10000
+        difference--5000
+      ))
     end
   end
 end
